@@ -9,7 +9,9 @@ const express = require('express');
 const router  = express.Router();
 // const router  = express.Router(mergeParams : true);
 
-module.exports = (db) => {
+const bcrypt = require('bcrypt');
+
+module.exports = (db, database) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -53,6 +55,52 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+/// Authentication
+
+  /**
+   * Check if a user exists with a given username and password
+   * @param {String} username
+   * @param {String} password encrypted
+   */
+  const login =  function(username, password) {
+    // return database.getUserWithEmail(email)
+    // console.log(username);
+    return database.getUserWithEmail(username)
+    .then(user => {
+      // console.log("password: ", user.password);
+      user.password = bcrypt.hashSync(user.password, 12);
+      if (bcrypt.compareSync(password, user.password)) {
+        console.log(user);
+        return user;
+      }
+      console.log ("not found");
+      return null;
+    });
+  }
+  exports.login = login;
+
+  router.post('/login', (req, res) => {
+    const {username, password} = req.body;
+    login(username, password)
+      .then(user => {
+        if (!user) {
+          res.send({error: "error"});
+          return;
+        }
+        // res.send(user);
+        req.session.userId = user.id;
+        // res.send({user: {id: user.id, username: user.name, password: user.password }});
+      })
+      .catch(e => res.send(e));
+  });
+  
+  router.post('/logout', (req, res) => {
+    req.session.userId = null;
+    res.send({});
+  });
+
 
   return router;
   
