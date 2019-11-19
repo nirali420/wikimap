@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <title>WIKIMAP</title>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/styles/user_mapview.css" rel="stylesheet" />
+    <link
+      href="http://fonts.googleapis.com/css?family=Bitter"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!------- Leaflet link for css and javascript---------->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+  </head>
+
+  <!---------------------- BODY ---------------------------------->
+  <body>
+    <!------------------ NAVIGATION ---------------------------->
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">How to use WIKIMAP</h4>
+              <p class="text-muted">
+                Create your own map or choose from the maps created by our
+                users. Mark the places you like to share with everyone. And hey,
+                you are good to go...!!!
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Hi there!</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Logout</a></li>
+                <li><a href="#" class="text-white">Create</a></li>
+                <li><a href="#" class="text-white">Favorite</a></li>
+                <li><a href="#" class="text-white">Collaboration</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              aria-hidden="true"
+              class="mr-2"
+              viewBox="0 0 24 24"
+              focusable="false"
+            >
+              <path
+                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+              />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            <strong>WIKIMAP</strong>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!----------------------- MAIN ELEMENT ------------------------>
+
+    <main role="main">
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="mapview-detials">
+            <!-------------------- COLUMN 1 --------------------------->
+            <div id="mapcard">
+              <!-- FORM STYLE START -->
+              <div class="form-style-2">
+                <div class="form-style-2-heading">MAP</div>
+                <form action="" method="post">
+                  <label for="field1"
+                    ><span>Title <span class="required">*</span></span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="field1"
+                      value=""
+                  /></label>
+                  <label for="field5"
+                    ><span>Description </span
+                    ><textarea name="field5" class="textarea-field"></textarea
+                  ></label>
+                  <label
+                    ><span> </span><input type="submit" value="Add map"
+                  /></label>
+                </form>
+                <form action="" method="post">
+                  <div class="form-style-2-heading">MARKERS</div>
+                  <label for="field1"
+                    ><span>Location </span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="field1"
+                      value=""
+                  /></label>
+                  <label for="field1"
+                    ><span>Title <span class="required">*</span></span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="field1"
+                      value=""
+                  /></label>
+                  <label for="field1"
+                    ><span>Image</span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="field1"
+                      value=""
+                  /></label>
+                  <label for="field5"
+                    ><span>Description </span
+                    ><textarea name="field5" class="textarea-field"></textarea
+                  ></label>
+                  <label
+                    ><span> </span><input type="submit" value="Add marker"
+                  /></label>
+                </form>
+                <div class="form-style-2-heading">LIST OF MARKERS</div>
+                <ul class="marker-list">
+                  <li>Calgary Tower</li>
+                  <li>Calgary Zoo</li>
+                  <li>Calgary Museum</li>
+                </ul>
+              </div>
+              <!-- FORM STYLE END -->
+            </div>
+            <div id="mapview">
+              <div class="card mb-4 shadow-sm">
+                <div class="mapbox">
+                  <div id="mapid" style="width: 100%; height: 100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      var mymap = L.map("mapid").setView([51.505, -0.09], 13);
+
+      L.tileLayer(
+        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+        {
+          maxZoom: 18,
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          id: "mapbox.streets"
+        }
+      ).addTo(mymap);
+    </script>
+  </body>
+</html>
