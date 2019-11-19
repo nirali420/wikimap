@@ -53,8 +53,8 @@ module.exports = (db) => {
   router.post("/maps/:id/markers", (req, res) => {
     let rb = req.body;
     console.log(rb);
-    let query = `INSERT INTO markers(id, title, description, image_url, longitude, latitude, owner_id, map_id )
-    VALUES( ${rb.id}, ${rb.title}, ${rb.description}, ${rb.image_url}, ${rb.longitude}, ${rb.latitude}, ${rb.owner_id},  ${rb.map_id} )`;
+    let query = `INSERT INTO markers(title, description, image_url, longitude, latitude, owner_id, map_id )
+    VALUES( ${rb.title}, ${rb.description}, ${rb.image_url}, ${rb.longitude}, ${rb.latitude}, ${rb.owner_id},  ${rb.map_id} )`;
     console.log(query);
     db.query(query)
       .then(data => {

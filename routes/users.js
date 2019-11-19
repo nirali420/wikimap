@@ -42,9 +42,9 @@ module.exports = (db, database) => {
     console.log(req.body);
 
     db.query(
-      `INSERT INTO users (id, username, password)
-     VALUES ($1, $2, $3)`,
-      [`${req.body.id}`, `${req.body.username}`, `${req.body.password}`]
+      `INSERT INTO users (username, password)
+     VALUES ($1, $2)`,
+      [`${req.body.username}`, `${req.body.password}`]
     )
 
       // db.query(`INSERT INTO users (id, username, password)
@@ -105,3 +105,4 @@ module.exports = (db, database) => {
 
   return router;
 };
+
