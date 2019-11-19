@@ -23,6 +23,7 @@ CREATE TABLE maps
 	description text,
 	longitude double precision NOT NULL,
 	latitude double precision NOT NULL,
+	location point NOT NULL,
 	owner_id int REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -34,6 +35,7 @@ CREATE TABLE markers
 	image_url text,
 	longitude double precision NOT NULL,
 	latitude double precision NOT NULL,
+	location point NOT NULL,
 	owner_id int REFERENCES users(id) ON DELETE CASCADE,
 	map_id int REFERENCES maps(id) ON DELETE CASCADE
 );
@@ -51,3 +53,12 @@ CREATE TABLE collaborations
 	user_id int REFERENCES users(id) ON DELETE CASCADE,
 	map_id int REFERENCES maps(id) ON DELETE CASCADE
 );
+
+
+-- https://tapoueh.org/blog/2018/05/postgresql-data-types-point/
+
+-- https://stackoverflow.com/questions/41494211/insert-point-into-postgres-database
+-- CREATE TEMP TABLE x(p point) ;
+-- INSERT INTO x VALUES ('(1,2)');
+-- INSERT INTO x VALUES (point(3, 4));
+-- SELECT * FROM x ;
