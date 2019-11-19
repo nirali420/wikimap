@@ -3,7 +3,7 @@ CASCADE;
 
 CREATE TABLE favorites
 (
-	id int PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	user_id int REFERENCES users(id) ON DELETE CASCADE,
 	map_id int REFERENCES maps(id) ON DELETE CASCADE
 );

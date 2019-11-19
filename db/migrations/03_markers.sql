@@ -3,7 +3,7 @@ CASCADE;
 
 CREATE TABLE markers
 (
-	id int PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	title varchar(255),
 	description text,
 	image_url text,

@@ -2,40 +2,40 @@
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(1, 'aaronjames', 'password');
+	(DEFAULT, 'aaronjames', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(2, 'alexwalker', 'password');
+	(DEFAULT, 'alexwalker', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(3, 'baileywhite', 'password');
+	(DEFAULT, 'baileywhite', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(4, 'tylerriley', 'password');
+	(DEFAULT, 'tylerriley', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(5, 'judecook', 'password');
+	(DEFAULT, 'judecook', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(6, 'brycenspence', 'password');
+	(DEFAULT, 'brycenspence', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(7, 'Tyreemoses', 'password');
+	(DEFAULT, 'tyreemoses', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(8, 'michaellaughlin', 'password');
+	(DEFAULT, 'michaellaughlin', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(9, 'roccomorgan', 'password');
+	(DEFAULT, 'roccomorgan', 'password');
 INSERT INTO users
 	(id, username, password)
 VALUES
-	(10, 'tristandouglas', 'password');
+	(DEFAULT, 'tristandouglas', 'password');

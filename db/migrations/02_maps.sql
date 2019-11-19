@@ -3,7 +3,7 @@ CASCADE;
 
 CREATE TABLE maps
 (
-	id int PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	title varchar(255),
 	description text,
 	longitude double precision NOT NULL,
