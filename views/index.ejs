@@ -1,22 +1,4 @@
 <!DOCTYPE html>
-<!--<html lang="en">
-  <head>
-    <title>Home Page</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
-
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html> -->
-
-<!--------------------- new code starts here ----------------->
 
 <html lang="en">
   <head>
@@ -33,19 +15,14 @@
     <meta name="generator" content="Jekyll v3.8.5" />
     <title>WIKIMAP</title>
 
-    <!-- <link
-      rel="canonical"
-      type="text/css"
-      href="https://getbootstrap.com/docs/4.3/examples/album/"
-    /> -->
-
     <!-- Bootstrap code -->
 
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"
     ></script>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -63,14 +40,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link
-      href="/bootstrap-4.3.1-dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    /> -->
 
     <!-- Custom styles for this template -->
     <link href="/styles/layout.css" rel="stylesheet" />
@@ -92,7 +61,7 @@
   <!---------------------- BODY ---------------------------------->
   <body>
     <!------------------ NAVIGATION ---------------------------->
-    <header>
+    <div>
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
@@ -106,13 +75,13 @@
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white">Hi there!</h4>
-              <form action="" method="post">
+              <form action="/" method="POST" type="submit" id="loginform">
                 <label for="field1"
                   ><span></span
                   ><input
                     type="text"
                     class="input-field"
-                    name="field1"
+                    name="username"
                     placeholder="username"
                     value=""
                 /></label>
@@ -121,12 +90,16 @@
                   ><input
                     type="text"
                     class="input-field"
-                    name="field2"
+                    name="password"
                     placeholder="password"
                     value=""
                 /></label>
                 <ul class="list-unstyled">
-                  <li><a href="#" class="text-white">Login</a></li>
+                  <!-- <li><input type="submit" value="Login"></li> -->
+                  <li>
+                    <a class="text-white" onclick="loginform.submit()">Login</a>
+                  </li>
+                  <!-- <li><a href="#" class="text-white" type="submit">Login</a></li> -->
                 </ul>
               </form>
             </div>
@@ -170,7 +143,7 @@
           </button>
         </div>
       </div>
-    </header>
+    </div>
 
     <!----------------------- MAIN ELEMENT ------------------------>
 
@@ -192,40 +165,29 @@
         <div class="container">
           <div class="row">
             <!-------------------- COLUMN 1 --------------------------->
+            <% for (let i = 0; i < maps.length; i++){ %>
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
                 <div class="mapbox">
-                  <div id="mapid" style="width: 100%; height: 100%;"></div>
+                  <div
+                    id="<%= maps[i].id %>"
+                    style="width: 100%; height: 100%;"
+                  ></div>
                 </div>
-                <!-- <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg> -->
+
                 <div class="card-body">
-                  <h4>Title</h4>
-                  <p class="card-text">Description-map</p>
+                  <h4><%= maps[i].title %></h4>
+                  <p class="card-text"><%= maps[i].description %></p>
                   <div
                     class="d-flex justify-content-between align-items-center"
                   >
                     <div class="btn-group">
-                      <button
-                        type="button"
+                      <a
+                        href="/maps/<%= maps[i].id %>"
                         class="btn btn-sm btn-outline-secondary"
                       >
                         View
-                      </button>
+                      </a>
                       <!-- <button
                         type="button"
                         class="btn btn-sm btn-outline-secondary"
@@ -238,192 +200,10 @@
                 </div>
               </div>
             </div>
+            <% } %>
             <!-------------------- COLUMN 2 --------------------------->
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <div class="mapbox">
-                  <div id="mapid1" style="width: 100%; height: 100%;"></div>
-                </div>
-                <!-- <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg> -->
-                <div class="card-body">
-                  <h4>Title</h4>
-                  <p class="card-text">Description-map</p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <!-- <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button> -->
-                    </div>
-                    <!-- <small class="text-muted">9 mins</small> -->
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <!-------------------- COLUMN 3 --------------------------->
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <div class="mapbox">
-                  <div id="mapid2" style="width: 100%; height: 100%;"></div>
-                </div>
-                <!-- <svg
-                  class="bd-placeholder-img card-img-top"
-                  width="100%"
-                  height="225"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Thumbnail
-                  </text>
-                </svg> -->
-                <div class="card-body">
-                  <h4>Title</h4>
-                  <p class="card-text">Description-map</p>
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div class="btn-group">
-                      <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        View
-                      </button>
-                      <!-- <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button> -->
-                    </div>
-                    <!-- <small class="text-muted">9 mins</small> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div> -->
           </div>
         </div>
       </div>
@@ -436,36 +216,33 @@
         </p>
       </div>
     </footer>
-    <script>
-      var mymap = L.map("mapid").setView([51.505, -0.09], 13);
 
-      L.tileLayer(
-        "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
-        {
-          maxZoom: 18,
-          attribution:
-            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-          id: "mapbox.streets"
-        }
-      ).addTo(mymap);
-    </script>
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
     <script>
-      window.jQuery ||
-        document.write(
-          '<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>'
-        );
+      $(() => {
+        $.getJSON("/maps.json")
+          .then(maps => {
+            maps.forEach(map =>
+              renderMap(`${map.id}`, [map.location.x, map.location.y])
+            );
+          })
+          .catch(err => console.error("ERRRRRRRRRRRRRRRRRRRRRRRR", err));
+      });
+      function renderMap(id, location) {
+        console.log("id, location", id, location);
+        var mymap = L.map(id).setView(location, 13);
+
+        L.tileLayer(
+          "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
+          {
+            maxZoom: 18,
+            attribution:
+              'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+              '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+              'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: "mapbox.streets"
+          }
+        ).addTo(mymap);
+      }
     </script>
-    <script
-      src="/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
-      crossorigin="anonymous"
-    ></script> -->
   </body>
 </html>

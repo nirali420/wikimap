@@ -10,19 +10,17 @@ const pool = new Pool({
   database: "midterm"
 });
 
-const getUserWithEmail = function(username) {
+const getUser = function(username) {
   // console.log("username in getUserWithEmail: ", username);
-  return (
-    pool
-      .query(
-        `
+  return pool
+    .query(
+      `
   SELECT *
   FROM users
   WHERE username = $1;`,
-        [`${username}`]
-      )
-      .then(res => res.rows[0])
-      .catch(err => null)
-  );
+      [`${username}`]
+    )
+    .then(res => res.rows[0])
+    .catch(err => null);
 };
-exports.getUserWithEmail = getUserWithEmail;
+exports.getUser = getUser;

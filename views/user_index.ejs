@@ -20,10 +20,11 @@
     <!-- Bootstrap code -->
 
     <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"
     ></script>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -76,12 +77,16 @@
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white">Hi there!</h4>
-              <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Logout</a></li>
-                <li><a href="#" class="text-white">Create</a></li>
-                <li><a href="#" class="text-white">Favorite</a></li>
-                <li><a href="#" class="text-white">Collaboration</a></li>
-              </ul>
+              <form action="/logout" method="POST" type="submit" id="mainform">
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-white" onclick="mainform.submit()">Logout</a>
+                  </li>
+                  <li><a href="#" class="text-white">Create</a></li>
+                  <li><a href="#" class="text-white">Favorite</a></li>
+                  <li><a href="#" class="text-white">Collaboration</a></li>
+                </ul>
+              </form>
             </div>
           </div>
         </div>
