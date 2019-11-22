@@ -11,36 +11,40 @@ const router = express.Router();
 module.exports = db => {
   //Get all maps
   router.get("/", (req, res) => {
-    let query = `SELECT favorites.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM favorites
+    db.query(
+      `SELECT favorites.*, maps.* FROM favorites
 JOIN maps ON favorites.map_id = maps.id
-		;`;
-    console.log(query);
-    db.query(query)
+WHERE favorites.user_id = ${req.session.user.id};`
+    )
       .then(data => {
-        const favs = data.rows;
+        const maps = data.rows;
         let tempVars = {
-          favs
+          user: req.session.user,
+          maps
         };
-        //res.json({ maps });
-        // console.log(tempVars);
-        res.render("user_fav", tempVars);
+        res.render("index", tempVars);
       })
       .catch(err => {
-        res.status(500).json({ error: err.message });
+        console.log(err);
+        res.status(500).json({ error: err });
       });
   });
-  router.get("/favs.json", (req, res) => {
-    let query = `SELECT favorites.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM favorites
-JOIN maps ON favorites.map_id = maps.id
-		;`;
-    db.query(query)
-      .then(data => {
-        const favs = data.rows;
-        res.json(favs);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  //   router.get("/favs.json", (req, res) => {
+  //     let query = `SELECT favorites.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM favorites
+  // JOIN maps ON favorites.map_id = maps.id
+  // 		;`;
+  //     db.query(query)
+  //       .then(data => {
+  //         const favs = data.rows;
+  //         res.json(favs);
+  //       })
+  //       .catch(err => {
+  //         res.status(500).json({ error: err.message });
+  //       });
+  //   });
   return router;
 };
+// `SELECT favorites.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM favorites
+// JOIN maps ON favorites.map_id = maps.id
+// WHERE favorites.user_id = ${req.session.user}
+// 		;`

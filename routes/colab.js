@@ -13,34 +13,33 @@ module.exports = db => {
   router.get("/", (req, res) => {
     let query = `SELECT collaborations.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM collaborations                
 JOIN maps ON collaborations.map_id = maps.id
+WHERE collaborations.user_id = ${req.session.user.id}
 		;`;
-    console.log(query);
     db.query(query)
       .then(data => {
-        const colabs = data.rows;
+        const maps = data.rows;
         let tempVars = {
-          colabs
+          maps,
+          user: req.session.user
         };
-        //res.json({ maps });
-        // console.log(tempVars);
-        res.render("user_colab", tempVars);
+        res.render("index", tempVars);
       })
       .catch(err => {
         res.status(500).json({ error: err.message });
       });
   });
-  router.get("/colabs.json", (req, res) => {
-    let query = `SELECT collaborations.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM collaborations                
-JOIN maps ON collaborations.map_id = maps.id
-		;`;
-    db.query(query)
-      .then(data => {
-        const colabs = data.rows;
-        res.json(colabs);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  //   router.get("/colabs.json", (req, res) => {
+  //     let query = `SELECT collaborations.*, maps.title, maps.description, maps.longitude, maps.latitude, maps.location, maps.owner_id FROM collaborations
+  // JOIN maps ON collaborations.map_id = maps.id
+  // 		;`;
+  //     db.query(query)
+  //       .then(data => {
+  //         const colabs = data.rows;
+  //         res.json(colabs);
+  //       })
+  //       .catch(err => {
+  //         res.status(500).json({ error: err.message });
+  //       });
+  //   });
   return router;
 };

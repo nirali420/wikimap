@@ -18,7 +18,7 @@ module.exports = db => {
         const maps = data.rows;
         let tempVars = {
           maps,
-          user: req.session.userId
+          user: req.session.user
         };
         //res.json({ maps });
         console.log(tempVars);
@@ -53,7 +53,7 @@ module.exports = db => {
           [map.id]
         ).then(markersData => {
           const tempVars = {
-            user: req.session.userId,
+            user: req.session.user,
             map: map,
             markers: markersData.rows
           };

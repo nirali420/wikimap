@@ -96,19 +96,14 @@ app.post("/", (req, res) => {
         res.send({ error: "error" });
         return;
       }
-      req.session.userId = user;
+      req.session.user = user;
       res.redirect("/");
     })
     .catch(e => res.send(e));
 });
 app.post("/logout", (req, res) => {
-  req.session.userId = null;
+  req.session.user = null;
   res.redirect(302, "/");
-});
-
-// Renders to fullpage mapview of collaboration for user
-app.get("/colab/:id", (req, res) => {
-  res.render("user_mapview", req.params);
 });
 
 app.listen(PORT, () => {

@@ -68,9 +68,8 @@
             <div class="col-sm-8 col-md-7 py-4">
               <h4 class="text-white">How to use WIKIMAP</h4>
               <p class="text-muted">
-                Create your own map or choose from the maps created by our
-                users. Mark the places you like to share with everyone. And hey,
-                you are good to go...!!!
+                View amazing maps created by our users, marked with their
+                favorite places. You can do that too so lets get started.
               </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
@@ -82,10 +81,10 @@
                     <a class="text-white" onclick="mainform.submit()">Logout</a>
                   </li>
                   <li>
-                    <a href="/fav" class="text-white">Create</a>
+                    <a href="#" class="text-white">Create</a>
                   </li>
-                  <li><a href="#" class="text-white">Favorite</a></li>
-                  <li><a href="#" class="text-white">Collaboration</a></li>
+                  <li><a href="/fav" class="text-white">Favorite</a></li>
+                  <li><a href="/colab" class="text-white">Collaboration</a></li>
                 </ul>
               </form>
               <% } else { %>
@@ -103,7 +102,7 @@
                 <label for="field2"
                   ><span></span
                   ><input
-                    type="text"
+                    type="password"
                     class="input-field"
                     name="password"
                     placeholder="password"
@@ -206,12 +205,9 @@
                       >
                         View
                       </a>
-                      <!-- <button
-                        type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button> -->
+                      <!-- <a class="btn btn-sm btn-outline-secondary">
+                        Favorite
+                      </a> -->
                     </div>
                     <!-- <small class="text-muted">9 mins</small> -->
                   </div>
@@ -239,9 +235,12 @@
       $(() => {
         $.getJSON("/maps.json")
           .then(maps => {
-            maps.forEach(map =>
-              renderMap(`${map.id}`, [map.location.x, map.location.y])
-            );
+            maps.forEach(map => {
+              const $map = $(`#${map.id}`);
+              if ($map.length) {
+                renderMap(`${map.id}`, [map.location.x, map.location.y]);
+              }
+            });
           })
           .catch(err => console.error("ERRRRRRRRRRRRRRRRRRRRRRRR", err));
       });

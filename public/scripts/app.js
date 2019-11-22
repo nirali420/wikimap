@@ -1,13 +1,3 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
 
 const renderMap = funtion(){
 let mymap = L.map("mapid").setView(latdata, 13);
