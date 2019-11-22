@@ -48,9 +48,9 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const indexRoutes = require("./routes/index");
 const colabRoutes = require("./routes/colab");
 const favRoutes = require("./routes/fav");
+const userIndexRoutes = require("./routes/user_index");
 const userRoutes = require("./routes/users");
 const mapsRoutes = require("./routes/maps");
 const markersRoutes = require("./routes/markers");
@@ -58,11 +58,12 @@ const markersRoutes = require("./routes/markers");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/", indexRoutes(db));
+// app.use("/", indexRoutes(db));
+app.use("/", mapsRoutes(db));
 app.use("/colab", colabRoutes(db));
 app.use("/fav", favRoutes(db));
-app.use("/api/users", userRoutes(db));
-app.use("/api/maps", mapsRoutes(db));
+app.use("/user_index", userIndexRoutes(db));
+app.use("/users", userRoutes(db));
 app.use("/api/markers", markersRoutes(db));
 // app.use("/api/widgets", widgetsRoutes(db));
 
@@ -72,26 +73,6 @@ app.use("/api/markers", markersRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/", (req, res) => {
-  let templateVars = {
-    user: req.session.userId
-  };
-  res.render("index", templateVars);
-  // res.render("index");
-});
-app.get("/user_index", (req, res) => {
-  // let templateVars = {
-  //   user: req.session.userId
-  // };
-  res.render("user_index");
-});
-// Display index page
-app.get("/index", (req, res) => {
-  let templateVars = {
-    user: undefined
-  };
-  res.render("index", templateVars);
-});
 /// Authentication
 /**
  * Check if a user exists with a given username and password
@@ -101,10 +82,8 @@ app.get("/index", (req, res) => {
 const login = function(username, password) {
   return database.getUser(username).then(user => {
     if (password === user.password) {
-      console.log("user authenticated");
       return user;
     }
-    console.log("user not authenticated");
     return null;
   });
 };
@@ -117,30 +96,18 @@ app.post("/", (req, res) => {
         res.send({ error: "error" });
         return;
       }
-      console.log("user logged in? ", user);
       req.session.userId = user;
-      res.redirect("user_index");
+      res.redirect("/");
     })
     .catch(e => res.send(e));
 });
 app.post("/logout", (req, res) => {
   req.session.userId = null;
   res.redirect(302, "/");
-  // res.send({});
-});
-
-//Renders to fullpage mapview for visitor
-app.get("/maps/:id", (req, res) => {
-  res.render("visitor_mapview", req.params);
 });
 
 // Renders to fullpage mapview of collaboration for user
 app.get("/colab/:id", (req, res) => {
-  res.render("user_mapview", req.params);
-});
-
-// Renders to fullpage mapview of favorite for user
-app.get("/fav/:id", (req, res) => {
   res.render("user_mapview", req.params);
 });
 

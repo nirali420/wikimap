@@ -11,16 +11,14 @@ const router = express.Router();
 module.exports = db => {
   //Get all maps
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM maps;`;
-    //console.log(query);
-    db.query(query)
+    db.query(`SELECT * FROM maps;`)
       .then(data => {
         const maps = data.rows;
         let tempVars = {
           maps
         };
         //res.json({ maps });
-        res.render("index", tempVars);
+        res.render("user_index", tempVars);
       })
       .catch(err => {
         res.status(500).json({ error: err.message });

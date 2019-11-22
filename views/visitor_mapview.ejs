@@ -64,90 +64,93 @@
   <!---------------------- BODY ---------------------------------->
   <body>
     <!------------------ NAVIGATION ---------------------------->
-    <div>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">How to use WIKIMAP</h4>
-              <p class="text-muted">
-                Create your own map or choose from the maps created by our
-                users. Mark the places you like to share with everyone. And hey,
-                you are good to go...!!!
-              </p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Hi there!</h4>
-              <form action="/" method="POST" type="submit" id="loginform">
-                <label for="field1"
-                  ><span></span
-                  ><input
-                    type="text"
-                    class="input-field"
-                    name="username"
-                    placeholder="username"
-                    value=""
-                /></label>
-                <label for="field2"
-                  ><span></span
-                  ><input
-                    type="text"
-                    class="input-field"
-                    name="password"
-                    placeholder="password"
-                    value=""
-                /></label>
-                <ul class="list-unstyled">
-                  <!-- <li><input type="submit" value="Login"></li> -->
-                  <li>
-                    <a class="text-white" onclick="loginform.submit()">Login</a>
-                  </li>
-                  <!-- <li><a href="#" class="text-white" type="submit">Login</a></li> -->
-                </ul>
-              </form>
+    <header>
+      <div>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">How to use WIKIMAP</h4>
+                <p class="text-muted">
+                  Create your own map or choose from the maps created by our
+                  users. Mark the places you like to share with everyone. And
+                  hey, you are good to go...!!!
+                </p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Hi there!</h4>
+                <form action="/" method="POST" type="submit" id="loginform">
+                  <label for="field1"
+                    ><span></span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="username"
+                      placeholder="username"
+                      value=""
+                  /></label>
+                  <label for="field2"
+                    ><span></span
+                    ><input
+                      type="text"
+                      class="input-field"
+                      name="password"
+                      placeholder="password"
+                      value=""
+                  /></label>
+                  <ul class="list-unstyled">
+                    <!-- <li><input type="submit" value="Login"></li> -->
+                    <li>
+                      <a class="text-white" onclick="loginform.submit()"
+                        >Login</a
+                      >
+                    </li>
+                    <!-- <li><a href="#" class="text-white" type="submit">Login</a></li> -->
+                  </ul>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              aria-hidden="true"
-              class="mr-2"
-              viewBox="0 0 24 24"
-              focusable="false"
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                aria-hidden="true"
+                class="mr-2"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path
+                  d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+                />
+                <circle cx="12" cy="13" r="4" />
+              </svg>
+              <strong>WIKIMAP</strong>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarHeader"
+              aria-controls="navbarHeader"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-              <path
-                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
-              />
-              <circle cx="12" cy="13" r="4" />
-            </svg>
-            <strong>WIKIMAP</strong>
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarHeader"
-            aria-controls="navbarHeader"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
+    </header>
     <!----------------------- MAIN ELEMENT ------------------------>
 
     <main role="main">
@@ -222,7 +225,7 @@
             <div id="mapview">
               <div class="card mb-4 shadow-sm">
                 <div class="mapbox">
-                  <div id="mapid" style="width: 100%; height: 100%;"></div>
+                  <div id="<%= id %>" style="width: 100%; height: 100%;"></div>
                 </div>
               </div>
             </div>
@@ -258,7 +261,7 @@
       }
     </script> -->
     <script>
-      var mymap = L.map("mapid").setView([51.505, -0.09], 13);
+      var mymap = L.map("<%= id %>").setView([51.505, -0.09], 13);
 
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",

@@ -61,7 +61,7 @@
   <!---------------------- BODY ---------------------------------->
   <body>
     <!------------------ NAVIGATION ---------------------------->
-    <div>
+    <header>
       <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
@@ -75,6 +75,21 @@
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white">Hi there!</h4>
+              <% if(user) { %>
+              <form action="/logout" method="POST" type="submit" id="mainform">
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-white" onclick="mainform.submit()">Logout</a>
+                  </li>
+                  <li>
+                    <a href="/fav" class="text-white">Create</a>
+                  </li>
+                  <li><a href="#" class="text-white">Favorite</a></li>
+                  <li><a href="#" class="text-white">Collaboration</a></li>
+                </ul>
+              </form>
+              <% } else { %>
+
               <form action="/" method="POST" type="submit" id="loginform">
                 <label for="field1"
                   ><span></span
@@ -102,13 +117,14 @@
                   <!-- <li><a href="#" class="text-white" type="submit">Login</a></li> -->
                 </ul>
               </form>
+              <% } %>
             </div>
           </div>
         </div>
       </div>
       <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
+          <a href="/" class="navbar-brand d-flex align-items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -143,11 +159,11 @@
           </button>
         </div>
       </div>
-    </div>
-
+    </header>
     <!----------------------- MAIN ELEMENT ------------------------>
 
     <main role="main">
+      <% if(!user) { %>
       <section class="jumbotron text-center">
         <div class="container">
           <!-- <h1 class="jumbotron-heading">HAVE FUN WITH MAPS!</h1>
@@ -160,8 +176,10 @@
           </p> -->
         </div>
       </section>
-
+      <% } else { %>
       <div class="album py-5 bg-light">
+        <h4 class="maphead"><%= user.username %>!</h4>
+        <% } %>
         <div class="container">
           <div class="row">
             <!-------------------- COLUMN 1 --------------------------->
